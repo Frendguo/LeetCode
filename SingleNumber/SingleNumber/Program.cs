@@ -23,21 +23,16 @@ namespace SingleNumber
             Console.Read();
         }
 
+        /*发现一名大牛的方法,XOR运算,酷酷酷!!*/
         public static int SingleNumber(int[] nums)
         {
-            List<int> list = new List<int>();
+            int result = 0;
             for (int i = 0; i < nums.Length; i++)
             {
-                if (!list.Contains(nums[i]))
-                {
-                    list.Add(nums[i]);
-                }
-                else
-                {
-                    list.Remove(nums[i]);
-                }
+                result ^= nums[i];
             }
-            return list[0];
+
+            return result;
         }
     }
 }
