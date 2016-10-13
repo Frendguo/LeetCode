@@ -25,17 +25,19 @@ namespace SingleNumber
 
         public static int SingleNumber(int[] nums)
         {
-            List<int> list = nums.ToList();
-            for (int i = 0; i < list.Count; i++)
+            List<int> list = new List<int>();
+            for (int i = 0; i < nums.Length; i++)
             {
-                int tmp = list[0];
-                list.RemoveAt(0);
-                if (!list.Contains(tmp))
+                if (!list.Contains(nums[i]))
                 {
-                    return tmp;
+                    list.Add(nums[i]);
+                }
+                else
+                {
+                    list.Remove(nums[i]);
                 }
             }
-            return 0;
+            return list[0];
         }
     }
 }
