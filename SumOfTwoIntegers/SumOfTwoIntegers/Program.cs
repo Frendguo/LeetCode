@@ -21,6 +21,7 @@ namespace SumOfTwoIntegers
         static void Main(string[] args)
         {
             Console.WriteLine("15 + 16 = {0}", GetSum(15, 16));
+            Console.WriteLine("15 + 16 = {0}", GetSum_Point(15, 16));
             Console.Read();
         }
 
@@ -37,6 +38,17 @@ namespace SumOfTwoIntegers
             int result = GetSum(sum, carry);
 
             return result;
+        }
+
+        //利用指针的偏移来实现两数之和
+        unsafe public static int GetSum_Point(int a, int b)
+        {
+            unsafe
+            {
+                byte* c = (byte*)a;
+                int d = (int)&c[b];
+                return d;
+            }
         }
     }
 }
