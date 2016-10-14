@@ -27,17 +27,15 @@ namespace SumOfTwoIntegers
 
         public static int GetSum(int a, int b)
         {
-            if (b == 0)
+            while (b != 0)
             {
-                return a;
+                int sum = a ^ b;
+                int carry = (a & b) << 1;
+
+                a = sum;
+                b = carry;
             }
-
-            int sum = a ^ b;
-            int carry = (a & b) << 1;
-
-            int result = GetSum(sum, carry);
-
-            return result;
+            return a;
         }
 
         //利用指针的偏移来实现两数之和
