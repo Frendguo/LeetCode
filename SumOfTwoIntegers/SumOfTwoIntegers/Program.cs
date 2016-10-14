@@ -20,8 +20,11 @@ namespace SumOfTwoIntegers
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("15 + 16 = {0}", GetSum(15, 16));
-            Console.WriteLine("15 + 16 = {0}", GetSum_Point(15, 16));
+            int a = Convert.ToInt32(Console.ReadLine());
+            int b = Convert.ToInt32(Console.ReadLine());
+            //Console.WriteLine("{0} + {1} = {2}", a, b, GetSum(a, b));
+            //Console.WriteLine("{0} + {1} = {2}", a, b, GetSum_Point(a, b));
+            Console.WriteLine("{0} - {1} = {2}", a, b, GetMargin(a, b));
             Console.Read();
         }
 
@@ -47,6 +50,18 @@ namespace SumOfTwoIntegers
                 int d = (int)&c[b];
                 return d;
             }
+        }
+
+        public static int GetMargin(int a, int b)
+        {
+            while (b != 0)
+            {
+                int sameNum = a & b;
+                a ^= sameNum;
+                b ^= sameNum;
+                b = b << 1;
+            }
+            return a;
         }
     }
 }
