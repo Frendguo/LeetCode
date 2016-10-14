@@ -56,10 +56,15 @@ namespace SumOfTwoIntegers
         {
             while (b != 0)
             {
+                // 去掉被减数和减数中同为1的位
                 int sameNum = a & b;
                 a ^= sameNum;
                 b ^= sameNum;
-                b = b << 1;
+                
+                // 此时，a 和 b 不存在同时为1 的位
+                // 0 - 1 和 1 - 0 都为1
+                a |= b; // 得到相减的临时结果（不考虑借位）
+                b = b << 1; // 减数为1 时，必有借位
             }
             return a;
         }
