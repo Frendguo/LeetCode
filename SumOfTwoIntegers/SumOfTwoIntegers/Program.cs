@@ -25,6 +25,7 @@ namespace SumOfTwoIntegers
             //Console.WriteLine("{0} + {1} = {2}", a, b, GetSum(a, b));
             //Console.WriteLine("{0} + {1} = {2}", a, b, GetSum_Point(a, b));
             Console.WriteLine("{0} - {1} = {2}", a, b, GetMargin(a, b));
+            Console.WriteLine("{0} - {1} = {2}", a, b, GetProduct(a, b));
             Console.Read();
         }
 
@@ -68,5 +69,23 @@ namespace SumOfTwoIntegers
             }
             return a;
         }
+
+        public static int GetProduct(int a, int b)
+        {
+            // 1.先只考虑正整数的相乘
+
+            int result = 0;
+            for (int bits = 1; bits != 0; bits <<= 1)
+            {
+                if ((bits & b) != 0)
+                {
+                    result = GetSum(result, a);
+                }
+                a <<= 1;
+            }
+
+            return result;
+        }
+
     }
 }
