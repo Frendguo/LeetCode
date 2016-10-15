@@ -25,7 +25,8 @@ namespace SumOfTwoIntegers
             //Console.WriteLine("{0} + {1} = {2}", a, b, GetSum(a, b));
             //Console.WriteLine("{0} + {1} = {2}", a, b, GetSum_Point(a, b));
             Console.WriteLine("{0} - {1} = {2}", a, b, GetMargin(a, b));
-            Console.WriteLine("{0} - {1} = {2}", a, b, GetProduct(a, b));
+            Console.WriteLine("{0} x {1} = {2}", a, b, GetProduct(a, b));
+            //Console.WriteLine("{0}", Convert.ToString(maxNumFlag(), 16)); //以十六进制显示数据
             Console.Read();
         }
 
@@ -70,9 +71,38 @@ namespace SumOfTwoIntegers
             return a;
         }
 
+        // 辅助函数
+        public static int maxNumFlag()
+        {
+            int bitsOfByte = 8;
+
+            int maxNum = 0x80;
+            int tmp = maxNum;
+            while (tmp != 0)
+            {
+                maxNum = tmp;
+                tmp <<= bitsOfByte;
+            }
+            return maxNum;
+        }
+
         public static int GetProduct(int a, int b)
         {
             // 1.先只考虑正整数的相乘
+            // 2.考虑正负情况和溢出问题
+
+            int maxNum = maxNumFlag();
+            int flag_a = 0;
+            if ((maxNum & a) == 0)
+            {
+                flag_a = 1; // 正数
+            }
+
+            int flag_b = 0;
+            if ((maxNum & b) == 0)
+            {
+                flag_b = 1;
+            }
 
             int result = 0;
             for (int bits = 1; bits != 0; bits <<= 1)
@@ -80,11 +110,16 @@ namespace SumOfTwoIntegers
                 if ((bits & b) != 0)
                 {
                     result = GetSum(result, a);
+                    if ((result & maxNum) != 0
+                        || (a & maxNum) != 0)
+                    {
+                        throw new Exception("数据过大！");
+                    }
                 }
                 a <<= 1;
             }
 
-            return result;
+            return (flag_a ^ flag_b) == 0 ? result : GetSum(~result, 1);
         }
 
     }
