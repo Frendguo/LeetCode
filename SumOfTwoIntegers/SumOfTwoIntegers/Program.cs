@@ -93,16 +93,18 @@ namespace SumOfTwoIntegers
             // 2.考虑正负情况和溢出问题
 
             int maxNum = maxNumFlag();
-            int flag_a = 0;
-            if ((maxNum & a) == 0)
+            int flag_a = 1;
+            if ((maxNum & a) != 0)
             {
-                flag_a = 1; // 正数
+                flag_a = 0; // 负数
+                a = GetSum(~a, 1);
             }
 
-            int flag_b = 0;
-            if ((maxNum & b) == 0)
+            int flag_b = 1;
+            if ((maxNum & b) != 0)
             {
-                flag_b = 1;
+                flag_b = 0;
+                b = GetSum(~b, 1);
             }
 
             int result = 0;
@@ -125,37 +127,80 @@ namespace SumOfTwoIntegers
 
         public static int GetQuotient(int a, int b)
         {
-            /*方法一*/
+            ///*方法一*/
+            //if (b == 0)
+            //{
+            //    throw new Exception("除数不能为0！！");
+            //}
+
+            //int maxNum = maxNumFlag();
+            //int flag_a = 1;
+            //if ((maxNum & a) != 0)
+            //{
+            //    flag_a = 0; // 负数
+            //    a = GetSum(~a, 1);
+            //}
+
+            //int flag_b = 1;
+            //if ((maxNum & b) != 0)
+            //{
+            //    flag_b = 0;
+            //    b = GetSum(~b, 1);
+            //}
+
+            //int index = 1;
+            //int tmp = GetMargin(a, b);
+            //if (tmp < 0)
+            //{
+            //    return 0;
+            //}
+
+            //while (tmp >= b)
+            //{
+            //    tmp = GetMargin(tmp, b); // 最后一次循环后的tmp 便是a/b 的余数
+            //    index = GetSum(index, 1);
+            //}
+            //return (flag_a ^ flag_b) == 0 ? index : GetSum(~index, 1);
+
+            /*方法二*/
             if (b == 0)
             {
                 throw new Exception("除数不能为0！！");
             }
 
             int maxNum = maxNumFlag();
-            int flag_a = 0;
-            if ((maxNum & a) == 0)
+            int flag_a = 1;
+            if ((maxNum & a) != 0)
             {
-                flag_a = 1; // 正数
-            }
-            int flag_b = 0;
-            if ((maxNum & b) == 0)
-            {
-                flag_b = 1;
+                flag_a = 0; // 负数
+                a = GetSum(~a, 1);
             }
 
-            int index = 1;
-            int tmp = GetMargin(a, b);
-            if (tmp < 0)
+            int flag_b = 1;
+            if ((maxNum & b) != 0)
             {
-                return 0;
+                flag_b = 0;
+                b = GetSum(~b, 1);
             }
 
-            while (tmp >= b)
+            int quotient = 0;
+            int backupB = b;
+            while (a >= b)
             {
-                tmp = GetMargin(tmp, b); // 最后一次循环后的tmp 便是a/b 的余数
-                index = GetSum(index, 1);
+                int tempB = b << 1;
+                int tempQ = 1;
+                while ((tempB <= a) && ((tempB & maxNumFlag()) == 0))
+                {
+                    b = tempB;
+                    tempQ <<= 1;
+                    tempB <<= 1;
+                }
+
+                a = GetMargin(a, b);
+                quotient |= tempQ;
+                b = backupB;
             }
-            return (flag_a ^ flag_b) == 0 ? index : GetSum(~index, 1);
+            return (flag_a ^ flag_b) == 0 ? quotient : GetSum(~quotient, 1);
         }
 
     }
