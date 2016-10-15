@@ -26,6 +26,7 @@ namespace SumOfTwoIntegers
             //Console.WriteLine("{0} + {1} = {2}", a, b, GetSum_Point(a, b));
             Console.WriteLine("{0} - {1} = {2}", a, b, GetMargin(a, b));
             Console.WriteLine("{0} x {1} = {2}", a, b, GetProduct(a, b));
+            Console.WriteLine("{0} / {1} = {2}", a, b, GetQuotient(a, b));
             //Console.WriteLine("{0}", Convert.ToString(maxNumFlag(), 16)); //以十六进制显示数据
             Console.Read();
         }
@@ -120,6 +121,41 @@ namespace SumOfTwoIntegers
             }
 
             return (flag_a ^ flag_b) == 0 ? result : GetSum(~result, 1);
+        }
+
+        public static int GetQuotient(int a, int b)
+        {
+            /*方法一*/
+            if (b == 0)
+            {
+                throw new Exception("除数不能为0！！");
+            }
+
+            int maxNum = maxNumFlag();
+            int flag_a = 0;
+            if ((maxNum & a) == 0)
+            {
+                flag_a = 1; // 正数
+            }
+            int flag_b = 0;
+            if ((maxNum & b) == 0)
+            {
+                flag_b = 1;
+            }
+
+            int index = 1;
+            int tmp = GetMargin(a, b);
+            if (tmp < 0)
+            {
+                return 0;
+            }
+
+            while (tmp >= b)
+            {
+                tmp = GetMargin(tmp, b); // 最后一次循环后的tmp 便是a/b 的余数
+                index = GetSum(index, 1);
+            }
+            return (flag_a ^ flag_b) == 0 ? index : GetSum(~index, 1);
         }
 
     }
