@@ -200,6 +200,12 @@ namespace SumOfTwoIntegers
                 quotient |= tempQ;
                 b = backupB;
             }
+
+            if (((maxNum & a) != 0) && (a != 0))
+            {
+                quotient = GetSum(quotient, 1);
+            }
+
             return (flag_a ^ flag_b) == 0 ? quotient : GetSum(~quotient, 1);
         }
 
