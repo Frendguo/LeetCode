@@ -39,18 +39,21 @@ namespace MaxNumDeepthOfBT
                 return 0;
             }
 
-            int depth_l = 0, depth_r = 0;
+            int depth_l = MaxDepth(root.left) + 1;
+            int depth_r = MaxDepth(root.right) + 1;
 
-            if (root.left != null)
-            {
-                depth_l = MaxDepth(root.left);
-            }
-            if (root.right != null)
-            {
-                depth_r = MaxDepth(root.right);
-            }
+            return Math.Max(depth_l, depth_r);
 
-            return Math.Max(depth_l, depth_r) + 1;
+            //if (root.left != null)
+            //{
+            //    depth_l = MaxDepth(root.left);
+            //}
+            //if (root.right != null)
+            //{
+            //    depth_r = MaxDepth(root.right);
+            //}
+
+            //return Math.Max(depth_l, depth_r) + 1;
         }
     }
 }
