@@ -26,23 +26,20 @@ namespace InvertBinaryTree
     {
         public TreeNode InvertTree(TreeNode root)
         {
-            TreeNode t;
-            if (root == null)
+            if (root != null)
             {
-                return root;
-            }
-            if ((root.left == null)&&(root.right == null))
-            {
-                return root;
-            }
-            
-            t = root.left;
-            root.left = root.right;
-            root.right = t;
+                if ((root.left == null) && (root.right == null))
+                {
+                    return root;
+                }
+                TreeNode t;
+                t = root.left;
+                root.left = root.right;
+                root.right = t;
 
-            root.left = InvertTree(root.left);
-            root.right = InvertTree(root.right);
-
+                root.left = InvertTree(root.left);
+                root.right = InvertTree(root.right);
+            }
             return root;
         }
     }
