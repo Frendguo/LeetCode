@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 /*
  * 问题描述：
+ * 也可称为 数根.digital-root 参考：https://en.wikipedia.org/wiki/Digital_root
  * Given a non-negative integer num, repeatedly add all its digits until the result has only one digit.
 
     For example:
