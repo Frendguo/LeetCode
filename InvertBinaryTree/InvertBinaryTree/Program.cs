@@ -35,22 +35,10 @@ namespace InvertBinaryTree
             {
                 return root;
             }
-            else if (root.left == null)
-            {
-                root.left = root.right;
-                root.right = null;
-            }
-            else if (root.right == null)
-            {
-                root.right = root.left;
-                root.left = null;
-            }
-            else
-            {
-                t = root.left;
-                root.left = root.right;
-                root.right = t;
-            }
+            
+            t = root.left;
+            root.left = root.right;
+            root.right = t;
 
             root.left = InvertTree(root.left);
             root.right = InvertTree(root.right);
