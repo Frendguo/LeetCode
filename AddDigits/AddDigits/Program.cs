@@ -33,10 +33,8 @@ namespace AddDigits
     {
         public int AddDigits(int num)
         {
-            int res = num % 9;
-            if (num <= 9) return num;
-            if (res == 0) return 9;
-            return res;
+            if (num == 0) return 0;
+            return (num - 1) % 9 + 1;
         }
     }
 }
