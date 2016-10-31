@@ -38,7 +38,7 @@ namespace MaxNumDeepthOfBT
             {
                 return 0;
             }
-
+            
             int depth_l = MaxDepth(root.left) + 1;
             int depth_r = MaxDepth(root.right) + 1;
 
