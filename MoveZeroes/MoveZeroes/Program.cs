@@ -39,13 +39,10 @@ namespace MoveZeroes
                 {
                     n++;
                 }
-                else
+                else if (n != 0)
                 {
                     nums[i - n] = nums[i];
-                    if (n != 0)
-                    {
-                        nums[i] = 0;
-                    }
+                    nums[i] = 0;
                 }
             }
         }
