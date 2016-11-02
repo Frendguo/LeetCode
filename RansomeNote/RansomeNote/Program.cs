@@ -46,22 +46,39 @@ namespace RansomeNote
 
     public class Solution
     {
-        public bool CanConstruct(string ransomeNote, string magazine)
+        public bool CanConstruct(string ransomNote, string magazine)
         {
-            List<char> list = new List<char>();
-            foreach (char c in magazine)
+            /*利用数组实现*/
+            int[] table = new int[26];
+            foreach (char ch in magazine)
             {
-                list.Add(c);
+                table[ch - 'a']++;
             }
-            foreach (char ch in ransomeNote)
+            foreach (char ch in ransomNote)
             {
-                if (!list.Remove(ch))
+                if (--table[ch - 'a'] < 0)
                 {
                     return false;
                 }
             }
 
             return true;
+
+            ///*利用链表的Add 和 Remove 实现*/
+            //List<char> list = new List<char>();
+            //foreach (char c in magazine)
+            //{
+            //    list.Add(c);
+            //}
+            //foreach (char ch in ransomNote)
+            //{
+            //    if (!list.Remove(ch))
+            //    {
+            //        return false;
+            //    }
+            //}
+
+            //return true;
         }
     }
 }
