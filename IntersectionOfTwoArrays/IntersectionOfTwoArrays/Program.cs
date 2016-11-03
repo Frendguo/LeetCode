@@ -27,17 +27,30 @@ namespace IntersectionOfTwoArrays
         public int[] IntersectionOfTwoArrays(int[] nums1, int[] nums2)
         {
             if (nums1.Length <= 0 || nums2.Length <= 0) return new int[0];
-            
-            int[] table = new int[65536];
-            List<int> list = new List<int>();
-            foreach (int item in nums1) table[item] = 1;
-            foreach (int item in nums2)
-                if (table[item] == 1)
-                {
-                    table[item] = 0;
-                    list.Add(item);
-                }
 
+            Dictionary<int, bool> dictionary = new Dictionary<int, bool>();
+
+            List<int> list = new List<int>();
+
+            foreach (int item in nums1)
+            {
+                if (!dictionary.ContainsKey(item))
+                {
+                    dictionary.Add(item, true);
+                }
+            }
+            foreach (int item in nums2)
+            {
+                if (dictionary.ContainsKey(item))
+                {
+                    if (dictionary[item])
+                    {
+                        list.Add(item);
+                        dictionary[item] = false;
+                    }
+                }
+            }
+                
             return list.ToArray();
         }
     }
