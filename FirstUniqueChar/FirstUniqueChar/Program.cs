@@ -35,32 +35,50 @@ namespace FirstUniqueChar
 
         static int FirstUniqueChar(string s)
         {
-            if (string.IsNullOrEmpty(s))
-            {
-                return -1;
-            }
-            Dictionary<char, int> dictionary = new Dictionary<char, int>();
+            /*采用数组实现*/
+            if (s.Length <= 0) return -1;
+            int[] character = new int[26];
             foreach (var ch in s)
             {
-                if (!dictionary.ContainsKey(ch))
-                {
-                    dictionary.Add(ch, 1);
-                }
-                else
-                {
-                    dictionary[ch]++;
-                }
+                character[ch - 'a']++;
             }
-
             for (int i = 0; i < s.Length; i++)
             {
-                if (dictionary[s[i]] == 1)
+                if (character[s[i] - 'a'] == 1)
                 {
                     return i;
                 }
             }
-
             return -1;
+
+
+            ///*采用Dictionary类实现*/
+            //if (string.IsNullOrEmpty(s))
+            //{
+            //    return -1;
+            //}
+            //Dictionary<char, int> dictionary = new Dictionary<char, int>();
+            //foreach (var ch in s)
+            //{
+            //    if (!dictionary.ContainsKey(ch))
+            //    {
+            //        dictionary.Add(ch, 1);
+            //    }
+            //    else
+            //    {
+            //        dictionary[ch]++;
+            //    }
+            //}
+
+            //for (int i = 0; i < s.Length; i++)
+            //{
+            //    if (dictionary[s[i]] == 1)
+            //    {
+            //        return i;
+            //    }
+            //}
+
+            //return -1;
         }
     }
 
