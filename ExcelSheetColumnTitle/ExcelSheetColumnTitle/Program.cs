@@ -34,11 +34,22 @@ namespace ExcelSheetColumnTitle
 
         static string ConvertToTitle(int n)
         {
+            ///*方法一*/
+            //string st = "";
+            //while (n != 0)
+            //{
+            //    st = (char)('A' + (n - 1) % 26) + st;
+            //    n = (n - 1) / 26;
+            //}
+            //return st;
+
+            /*方法二*/
+            string s = "ZABCDEFGHIJKLMNOPQRSTYVWXY";
             string st = "";
             while (n != 0)
             {
-                st = (char)('A' + (n - 1) % 26) + st;
-                n = (n - 1) / 26;
+                st = s[n % 26] + st;
+                n = n % 26 == 0 ? n / 26 - 1 : n / 26;
             }
             return st;
         }
