@@ -44,7 +44,7 @@ namespace FizzBuzz
         {
             Console.WriteLine("please input number is :");
             int n = Convert.ToInt32(Console.ReadLine());
-            List<string> list = FizzBuzz(n);
+            IList<string> list = FizzBuzz(n);
             Console.WriteLine("the string is :");
             foreach (var item in list)
             {
@@ -53,31 +53,60 @@ namespace FizzBuzz
             Console.ReadLine();
         }
 
-        static List<string> FizzBuzz(int n)
+        static IList<string> FizzBuzz(int n)
         {
-            /*方法一：采用 % 判断是否整除*/
-            List<string> list = new List<string>();
-            int t = 1;
-            string[] table = new string[] { "Fizz", "Buzz", "FizzBuzz" };
-            while (t <= n)
+            ///*方法一：采用 % 判断是否整除*/
+            //IList<string> list = new List<string>();
+            //int t = 1;
+            //string[] table = new string[] { "Fizz", "Buzz", "FizzBuzz" };
+            //while (t <= n)
+            //{
+            //    if (t % 15 == 0)
+            //    {
+            //        list.Add(table[2]);
+            //    }
+            //    else if (t % 3 == 0)
+            //    {
+            //        list.Add(table[0]);
+            //    }
+            //    else if (t % 5 == 0)
+            //    {
+            //        list.Add(table[1]);
+            //    }
+            //    else
+            //    {
+            //        list.Add(t.ToString());
+            //    }
+            //    t++;
+            //}
+            //return list;
+
+            /*方法二*/
+            IList<string> list = new List<string>();
+            for (int i = 1, fizz = 0, buzz = 0; i <= n; i++)
             {
-                if (t % 15 == 0)
+                fizz++;
+                buzz++;
+                if (fizz == 3 && buzz == 5)
                 {
-                    list.Add(table[2]);
+                    list.Add("FizzBuzz");
+                    fizz = 0;
+                    buzz = 0;
                 }
-                else if (t % 3 == 0)
+                else if (fizz == 3)
                 {
-                    list.Add(table[0]);
+                    list.Add("Fizz");
+                    fizz = 0;
                 }
-                else if (t % 5 == 0)
+                else if (buzz == 5)
                 {
-                    list.Add(table[1]);
+                    list.Add("Buzz");
+                    buzz = 0;
                 }
                 else
                 {
-                    list.Add(t.ToString());
+                    list.Add("" + i);
                 }
-                t++;
             }
             return list;
         }
