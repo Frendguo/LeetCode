@@ -81,34 +81,41 @@ namespace FizzBuzz
             //}
             //return list;
 
-            /*方法二*/
-            IList<string> list = new List<string>();
-            for (int i = 1, fizz = 0, buzz = 0; i <= n; i++)
-            {
-                fizz++;
-                buzz++;
-                if (fizz == 3 && buzz == 5)
-                {
-                    list.Add("FizzBuzz");
-                    fizz = 0;
-                    buzz = 0;
-                }
-                else if (fizz == 3)
-                {
-                    list.Add("Fizz");
-                    fizz = 0;
-                }
-                else if (buzz == 5)
-                {
-                    list.Add("Buzz");
-                    buzz = 0;
-                }
-                else
-                {
-                    list.Add("" + i);
-                }
-            }
-            return list;
+            ///*方法二*/
+            //IList<string> list = new List<string>();
+            //for (int i = 1, fizz = 0, buzz = 0; i <= n; i++)
+            //{
+            //    fizz++;
+            //    buzz++;
+            //    if (fizz == 3 && buzz == 5)
+            //    {
+            //        list.Add("FizzBuzz");
+            //        fizz = 0;
+            //        buzz = 0;
+            //    }
+            //    else if (fizz == 3)
+            //    {
+            //        list.Add("Fizz");
+            //        fizz = 0;
+            //    }
+            //    else if (buzz == 5)
+            //    {
+            //        list.Add("Buzz");
+            //        buzz = 0;
+            //    }
+            //    else
+            //    {
+            //        list.Add("" + i);
+            //    }
+            //}
+            //return list;
+
+            /*方法三：最具C#特色的方法*/
+            return Enumerable.Range(1, n).Select(i =>
+               (i % 3 == 0 && i % 5 == 0) ? "FizzBuzz"
+               : i % 3 == 0 ? "Fizz"
+               : i % 5 == 0 ? "Buzz"
+               : i.ToString()).ToList();
         }
     }
 }
