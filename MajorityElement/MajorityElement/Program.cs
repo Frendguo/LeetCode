@@ -26,22 +26,43 @@ namespace MajorityElement
 
         static int MajorityElement(int[] nums)
         {
-            /*方法一：采用Dictionary 实现*/
-            Dictionary<int, int> dictionary = new Dictionary<int, int>();
-            int n = nums.Length / 2;
-            foreach (int i in nums)
+            ///*方法一：采用Dictionary 实现*/
+            //Dictionary<int, int> dictionary = new Dictionary<int, int>();
+            //int n = nums.Length / 2;
+            //foreach (int i in nums)
+            //{
+            //    if (dictionary.ContainsKey(i))
+            //    {
+            //        if (++dictionary[i] > n) return i;
+            //    }
+            //    else
+            //    {
+            //        dictionary.Add(i, 1);
+            //        if (dictionary[i] > n) return i;
+            //    }
+            //}
+            //return -1;
+
+            /*方法二*/
+            int major = nums[0];
+            int count = 1;
+            for (int i = 1; i < nums.Length; i++)
             {
-                if (dictionary.ContainsKey(i))
+                if (count == 0)
                 {
-                    if (++dictionary[i] > n) return i;
+                    count++;
+                    major = nums[i];
+                }
+                else if (nums[i] == major)
+                {
+                    count++;
                 }
                 else
                 {
-                    dictionary.Add(i, 1);
-                    if (dictionary[i] > n) return i;
+                    count--;
                 }
             }
-            return -1;
+            return major;
         }
     }
 }
