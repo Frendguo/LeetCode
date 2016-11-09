@@ -23,7 +23,6 @@ namespace ConatainsDuplicate
                 Console.WriteLine("该数组有重复的元素！"); 
             else
                 Console.WriteLine("该数组没有重复的元素！");
-
             Console.Read();
         }
 
@@ -46,7 +45,7 @@ namespace ConatainsDuplicate
                 // 为什么除以8 ？ 考虑到 byte 是8位
                 int i = item / 8;
                 int j = item % 8;
-                byte check =(byte) (1 << j);
+                byte check = (byte)(1 << j);
                 if ((table[i] & check) != 0)
                 {
                     return true;
