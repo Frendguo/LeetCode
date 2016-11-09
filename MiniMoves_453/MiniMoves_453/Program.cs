@@ -35,20 +35,39 @@ namespace MiniMoves_453
 
         static int MiniMoves(int[] nums)
         {
-            /*方法一*/
-            // 将每次 n - 1个元素相加转化成
-            // 每次将一个元素相减
-            if (nums.Length <= 1)
-            {
-                return 0;
-            }
-            Array.Sort(nums);
+            ///*方法一*/
+            //// 将每次 n - 1个元素相加转化成
+            //// 每次将一个元素相减
+            //if (nums.Length <= 1)
+            //{
+            //    return 0;
+            //}
+            //Array.Sort(nums);
+            //int sum = 0;
+            //for (int i = 1; i < nums.Length; i++)
+            //{
+            //    sum += nums[i] - nums[0];
+            //}
+            //return sum;
+
+            /*方法二*/
+            // 假设:
+            // sum : 数组所有元素和 
+            // n   : 数组元素个数
+            // minNum : 数组中最小的元素的值
+            // x   : 数组中元素相等时各元素的值
+            // m   : 使数组相等至少需要移动的次数
+            // 于是有：sum + (n - 1) * m = n * x
+            // => x = miniNum + m
+            // => sum - miniNum * n = m
+            int min = nums[0];
             int sum = 0;
-            for (int i = 1; i < nums.Length; i++)
+            foreach (var item in nums)
             {
-                sum += nums[i] - nums[0];
+                min = Math.Min(min, item);
+                sum += item;
             }
-            return sum;
+            return sum - min * nums.Length;
         }
     }
 }
