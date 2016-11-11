@@ -19,19 +19,28 @@ namespace ReverseLinkList
 
         static ListNode ReverseLink(ListNode head)
         {
-            /*方法一： 迭代法*/
-            if (head == null || head.next == null) return head;
-            ListNode p = head.next;
+            ///*方法一： 迭代法*/
+            //if (head == null || head.next == null) return head;
+            //ListNode p = head.next;
+            //head.next = null;
+            //ListNode q = p;
+            //while (q != null)
+            //{
+            //    q = q.next;
+            //    p.next = head;
+            //    head = p;
+            //    p = q;
+            //}
+            //return head;
+
+            /*方法二：递归法*/
+            if (head == null || head.next == null)
+                return head;
+            ListNode nextNode = head.next;
+            ListNode newHead = ReverseLink(nextNode);
+            nextNode.next = head;
             head.next = null;
-            ListNode q = p;
-            while (q != null)
-            {
-                q = q.next;
-                p.next = head;
-                head = p;
-                p = q;
-            }
-            return head;
+            return newHead;
         }
     }
 
