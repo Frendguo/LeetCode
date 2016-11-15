@@ -39,16 +39,8 @@ namespace IsPowerOfThree
         /// <returns></returns>
         static bool IsPowerOfThree(int n)
         {
-            if (n <= 0) return false;
             int powerMax = (int)Math.Pow(3, (int)Math.Log(int.MaxValue, 3));
-            if (powerMax % n == 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return (n > 0 && powerMax % n == 0);
         }
     }
 }
